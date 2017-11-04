@@ -8,10 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Jess
- */
 public class ProdutoDAO {
     private static final String SQL_INSERIR_PRODUTO = "insert into produto (nome, descricao, id_animal, marca, valor, cd_tipo_produto) values(?,?,?,?,?, ?)";
     private static final String SQL_LISTAR_PRODUTOS = "select * from produto order by nome";

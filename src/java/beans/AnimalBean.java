@@ -62,7 +62,7 @@ public class AnimalBean implements Serializable{
     }
     
     public void consultar() throws SQLException, ClassNotFoundException{
-        animais = DAOFactory.getAnimalDao().consultar(animal.getNome());
+        animais = new AnimalRESTClient().findByName(animal.getNome());
     }
     
     public String alterarAnimal(Animal a) throws SQLException, ClassNotFoundException{
@@ -81,7 +81,7 @@ public class AnimalBean implements Serializable{
     }
     
     public List<SelectItem> getListarAnimais() throws SQLException, ClassNotFoundException{
-        animais = DAOFactory.getAnimalDao().listar();
+        animais = new AnimalRESTClient().findAll();
         List<SelectItem> animaisList = new ArrayList<>();
         for (Animal a : animais) {
             animaisList.add(new SelectItem(a.getId(),a.getNome()));

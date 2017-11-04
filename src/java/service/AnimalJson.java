@@ -10,10 +10,6 @@ import javax.json.JsonReader;
 import javax.json.JsonValue;
 import model.Animal;
 
-/**
- *
- * @author Jess
- */
 public class AnimalJson {
     public static String toJSON(Animal animal) {
         JsonObject contaJSON = Json.createObjectBuilder().

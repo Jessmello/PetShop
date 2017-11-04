@@ -6,10 +6,6 @@ package model;
  */
 public class DAOFactory {
     
-    public static AnimalDAO getAnimalDao(){
-        return new AnimalDAO();
-    }
-    
     public static ProdutoDAO getProdutoDAO(){
         return new ProdutoDAO();
     }
