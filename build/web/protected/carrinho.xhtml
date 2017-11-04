@@ -4,25 +4,22 @@
                 template="./_template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns="http://www.w3.org/1999/xhtml">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
         <h:form>
-            <h:dataTable value="#{carrinhoBean.itens}" var="c" 
-                         styleClass="tabela" captionClass="tabelaCaption"
-                         headerClass="tabelaHeader"
-                         rowClasses="linhaPar, linhaImpar">
-                <f:facet name="caption">#{msgs.produtosCarrinho}</f:facet>
-                <h:column>
-                    <f:facet name="header">#{msgs.descricao}</f:facet>
-                        #{c.descricao}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{msgs.quantidade}</f:facet>
-                        #{c.quantidade}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{msgs.valor}</f:facet>
+            <p:dataTable value="#{carrinhoBean.itens}" var="c" rows="10" rowsPerPageTemplate="5,10,20" paginator="true">
+                 <f:facet name="header">
+                    <h3>#{msgs.produtosCarrinho}</h3>
+                </f:facet>
+                <p:column headerText="#{msgs.nomeProduto}">
+                    #{c.nome}
+                </p:column>
+                <p:column headerText="#{msgs.quantidade}">
+                    #{c.quantidade}
+                </p:column>
+                <p:column headerText="#{msgs.valor}">
                     <h:outputText value="#{c.valor}">
                         <f:convertNumber type="currency"/>
                     </h:outputText>
@@ -32,15 +29,12 @@
                             <f:convertNumber type="currency"/>
                         </h:outputText>                    
                     </f:facet>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">#{msgs.excluir}</f:facet>
-                    <h:commandButton value="Excluir" 
-                                     action="#{carrinhoBean.excluir(c)}">
-                        <f:ajax render="@form"/>
-                    </h:commandButton>
-                </h:column>                
-            </h:dataTable>
+                </p:column>
+                <p:column style="width: 5%;" headerText="#{msgs.excluir}">
+                    <p:commandButton id="excluir" icon="ui-icon-trash" update="@form" action="#{carrinhoBean.excluir(c)}"/>
+                    <p:tooltip id="toolTipExcluir" for="excluir" value="Remover do carrinho"/>
+                </p:column>                
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

@@ -23,6 +23,7 @@ public class ProdutoBean implements Serializable {
     @New
     Produto produto;
     private List<Produto> produtos;
+    private List<Produto> produtosFiltrados;
     private final static int ACESSORIOS = 1;
     private final static int ALIMENTOS = 2;
     private final static int BRINQUEDOS = 3;
@@ -48,6 +49,14 @@ public class ProdutoBean implements Serializable {
 
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public List<Produto> getProdutosFiltrados() {
+        return produtosFiltrados;
+    }
+
+    public void setProdutosFiltrados(List<Produto> produtosFiltrados) {
+        this.produtosFiltrados = produtosFiltrados;
     }
     
     public String consultarAcessorios() throws SQLException, ClassNotFoundException {

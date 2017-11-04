@@ -4,20 +4,20 @@
                 template="./_template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns="http://www.w3.org/1999/xhtml">                
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui">                
 
     <ui:define name="content">
         <h:form id="frm">
-            <h:panelGrid columns="3">
+            <p:growl id="messages" showDetail="true"/>
+            <h:panelGrid columns="2">
                 #{msgs.indexLogin}:
-                <h:inputText value="#{usuarioBean.usuario.login}" id="login" label="#{msgs.indexLogin}" required="true"/>
-                <h:message for="login" styleClass="erro" />
+                <p:inputText value="#{usuarioBean.usuario.login}" placeholder="Nome do titular" id="login" label="#{msgs.indexLogin}" required="true"/>
                 #{msgs.indexSenha}:
-                <h:inputSecret value="#{usuarioBean.usuario.senha}" id="senha" label="#{msgs.indexSenha}" required="true"/>
-                <h:message for="senha" styleClass="erro" />
+                <p:password value="#{usuarioBean.usuario.senha}" placeholder="Senha" id="senha" label="#{msgs.indexSenha}" required="true"/>
             </h:panelGrid>
-            <h:commandButton value="#{msgs.indexEntrar}" action="#{usuarioBean.logar()}"/>
-            <h:commandButton value="#{msgs.indexNovaAgenda}" action="#{usuarioBean.novoUsuario()}" immediate="true"/>
+            <p:commandButton value="#{msgs.indexEntrar}" action="#{usuarioBean.logar()}" ajax="false"/>
+            <p:commandButton value="#{msgs.indexNovaAgenda}" action="#{usuarioBean.novoUsuario()}" immediate="true" ajax="false"/>
         </h:form>
         <hr/>
        
