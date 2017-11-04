@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <f:view locale="#{localizacaoBean.localizacao}"/>
+    </h:head>
+
+    <h:body>
+
+        <div id="top" class="top">
+            <h2>
+                <h:form>
+                    <ui:insert name="top">#{msgs.usuario}:  #{usuarioBean.usuario.nome}</ui:insert>
+                    <h:commandLink style="float: right; color: black" value="#{msgs.sair}" action="#{usuarioBean.sair()}" />
+                </h:form>
+            </h2>
+        </div>
+        
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    <h:form>
+                        <h:panelGrid>
+                            <h:commandLink value="#{msgs.acessorios}" action="#{produtoBean.consultarAcessorios}" />
+                            <h:commandLink value="#{msgs.alimentos}" action="#{produtoBean.consultarAlimentos}" />
+                            <h:commandLink value="#{msgs.brinquedos}" action="#{produtoBean.consultarBrinquedos}" />
+                            <h:commandLink value="#{msgs.higiene}" action="#{produtoBean.consultarHigiene}" />
+                            <h:commandLink value="#{msgs.remedios}" action="#{produtoBean.consultarRemedios}" />
+                            <h:commandLink value="#{msgs.carrinho}" action="#{carrinhoBean.consultarCarrinho}" />
+                            <hr rendered="#{usuarioBean.usuario.admin}"/>
+                            <h:outputText value="#{msgs.administracao}" rendered="#{usuarioBean.usuario.admin}"/>
+                            <h:commandLink value="#{msgs.cadastrarProduto}" action="#{produtoBean.cadastrarProduto}" rendered="#{usuarioBean.usuario.admin}"/>
+                            <h:commandLink value="#{msgs.animais}" action="#{animalBean.crudAnimal}" rendered="#{usuarioBean.usuario.admin}"/>
+                            <h:commandLink value="#{msgs.menuPrincipal}" action="#{produtoBean.paginaPrincipal}" />
+                        </h:panelGrid>
+                    </h:form>
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content"></ui:insert>
+            </div>
+        </div>
+       
+        <div id="footer" class="footer">
+           #{msgs.componentesGrupo}
+           <h:form id="frm_idioma" style="float: right;">
+                #{msgs.indexIdioma}:
+                <h:selectOneMenu value="#{localizacaoBean.localizacao}"                             
+                                 converter="converter.LocalizacaoConverter">
+                    <f:selectItems value="#{localizacaoBean.idiomasSuportados}"/>
+                    <f:ajax render="@all"/>
+                </h:selectOneMenu>
+            </h:form>
+        </div>
+    </h:body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./_template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns="http://www.w3.org/1999/xhtml">                
+    
+    <ui:define name="content">
+        <h3>#{msgs.higiene}</h3>
+        <h:form>
+            <h:inputText value="#{produtoBean.produto.nome}" p:placeholder="#{msgs.digiteNome}" id="nome">
+                <f:ajax render="@form" execute="nome" event="keyup" listener="#{produtoBean.consultarProduto()}"/>
+            </h:inputText>
+
+            <h:dataTable value="#{produtoBean.produtos}" var="c" border="1">
+                <h:column>
+                    <f:facet name="header">#{msgs.id}</f:facet>
+                    <h:commandLink value="#{c.id}" action="#{produtoBean.alterarProduto(c)}" rendered="#{usuarioBean.usuario.admin}"/>
+                    <h:outputText value="#{c.id}" rendered="#{!usuarioBean.usuario.admin}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.nomeAnimal}</f:facet>
+                    <h:outputText value="#{c.nome}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.descricao}</f:facet>
+                    <h:outputText value="#{c.descricao}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.valor}</f:facet>
+                    <h:outputText value="#{c.valor}">
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">#{msgs.comprar}</f:facet>
+                    <h:commandButton value="#{msgs.comprar}" actionListener="#{carrinhoBean.adicionarCarrinho(c)}" onclick="return confirm('#{msgs.confirmaAddCarrinho}');">
+                        <f:ajax render="@form" />
+                    </h:commandButton>
+                </h:column>
+                <h:column rendered="#{usuarioBean.usuario.admin}">
+                   <f:facet name="header">#{msgs.excluir}</f:facet>
+                    <h:commandButton value="#{msgs.excluir}" actionListener="#{produtoBean.excluir(c)}" onclick="return confirm('#{msgs.confirmaExclusao}');">
+                        <f:ajax render="@form" />
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

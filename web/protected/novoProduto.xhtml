@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./_template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+
+    <ui:define name="content">
+        <h:form>
+            <h3>#{msgs.cadastrarProduto}</h3>
+            <h:panelGrid columns="3">
+                #{msgs.tipoProduto}:
+                <h:selectOneMenu value="#{produtoBean.produto.tipo}" id="tipo" required ="true">
+                    <f:selectItems value="#{produtoBean.tiposProdutos}"/>
+                </h:selectOneMenu>
+                <h:message for="tipo" styleClass="erro" />
+                #{msgs.nomeProduto}:
+                <h:inputText value="#{produtoBean.produto.nome}" id="nome" label="#{msgs.nomeProduto}" required="true"/>
+                <h:message for="nome" styleClass="erro" />
+                #{msgs.descricao}:
+                <h:inputTextarea value="#{produtoBean.produto.descricao}" id="descricao" label="#{msgs.descricao}" required="true"/>
+                <h:message for="descricao" styleClass="erro" />
+                #{msgs.animal}:
+                <h:selectOneMenu value="#{produtoBean.produto.animal.id}" id="animal" required ="true">
+                    <f:selectItems value="#{animalBean.listarAnimais}"/>
+                </h:selectOneMenu>
+                <h:message for="animal" styleClass="erro" />
+                #{msgs.marca}:
+                <h:inputText value="#{produtoBean.produto.marca}" id="marca" label="#{msgs.marca}" required="true"/>
+                <h:message for="marca" styleClass="erro" />
+                #{msgs.valor}:
+                <h:inputText value="#{produtoBean.produto.valor}" id="valor" label="#{msgs.valor}" required="true">
+                    <f:convertNumber minFractionDigits="2"/>
+                </h:inputText>
+                <h:message for="valor" styleClass="erro" />
+            </h:panelGrid>
+            <h:commandButton value="#{msgs.cadastrar}" action="#{produtoBean.novoProduto()}"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <f:view locale="#{localizacaoBean.localizacao}"/>
+    </h:head>
+
+    <h:body>
+
+        <div id="top" class="top">
+            <h2>
+                <ui:insert name="top"></ui:insert>
+            </h2>
+            
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content"></ui:insert>
+        </div>
+        
+        <div id="footer" class="footer">
+            #{msgs.componentesGrupo}
+            <h:form id="frm_idioma" style="float: right;">
+                #{msgs.indexIdioma}:
+                <h:selectOneMenu value="#{localizacaoBean.localizacao}"                             
+                                 converter="converter.LocalizacaoConverter">
+                    <f:selectItems value="#{localizacaoBean.idiomasSuportados}"/>
+                    <f:ajax render="@all"/>
+                </h:selectOneMenu>
+            </h:form>
+        </div>
+    </h:body>
+</html>
