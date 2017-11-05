@@ -16,8 +16,8 @@
                 #{msgs.indexSenha}:
                 <p:password value="#{usuarioBean.usuario.senha}" placeholder="Senha" id="senha" label="#{msgs.indexSenha}" required="true"/>
             </h:panelGrid>
-            <p:commandButton value="#{msgs.indexEntrar}" action="#{usuarioBean.logar()}" ajax="false"/>
-            <p:commandButton value="#{msgs.indexNovaAgenda}" action="#{usuarioBean.novoUsuario()}" immediate="true" ajax="false"/>
+            <p:commandButton value="#{msgs.indexEntrar}" action="#{usuarioBean.logar()}" ajax="false" style="margin-left: 100px !important;"/>
+            <p:commandButton value="#{msgs.indexNovaAgenda}" icon="fa fa-user-plus" action="#{usuarioBean.novoUsuario()}" immediate="true" ajax="false"/>
         </h:form>
         <hr/>
        

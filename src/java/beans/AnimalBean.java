@@ -24,6 +24,7 @@ public class AnimalBean implements Serializable{
     @Inject @New
     private Animal animal;
     private List<Animal> animais;
+    private List<Animal> animaisFiltrados;
 
     public AnimalBean(){
     }
@@ -43,7 +44,14 @@ public class AnimalBean implements Serializable{
     public void setAnimais(List<Animal> animais) {
         this.animais = animais;
     }
-    
+
+    public List<Animal> getAnimaisFiltrados() {
+        return animaisFiltrados;
+    }
+
+    public void setAnimaisFiltrados(List<Animal> animaisFiltrados) {
+        this.animaisFiltrados = animaisFiltrados;
+    }
     
     public String crudAnimal() throws SQLException, ClassNotFoundException {
         animais = new AnimalRESTClient().findAll();

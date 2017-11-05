@@ -4,39 +4,36 @@
                 template="./_template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns="http://www.w3.org/1999/xhtml">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui">
 
 
     <ui:define name="content">
         <h:form>
             <h3>#{msgs.cadastrarProduto}</h3>
-            <h:panelGrid columns="3">
+            <p:growl id="messages" showDetail="true"/>
+            <h:panelGrid columns="2">
                 #{msgs.tipoProduto}:
-                <h:selectOneMenu value="#{produtoBean.produto.tipo}" id="tipo" required ="true">
+                <p:selectOneMenu value="#{produtoBean.produto.tipo}" id="tipo" required ="true">
                     <f:selectItems value="#{produtoBean.tiposProdutos}"/>
-                </h:selectOneMenu>
-                <h:message for="tipo" styleClass="erro" />
+                </p:selectOneMenu>
                 #{msgs.nomeProduto}:
-                <h:inputText value="#{produtoBean.produto.nome}" id="nome" label="#{msgs.nomeProduto}" required="true"/>
-                <h:message for="nome" styleClass="erro" />
+                <p:inputText value="#{produtoBean.produto.nome}" id="nome" label="#{msgs.nomeProduto}" required="true"/>
                 #{msgs.descricao}:
-                <h:inputTextarea value="#{produtoBean.produto.descricao}" id="descricao" label="#{msgs.descricao}" required="true"/>
-                <h:message for="descricao" styleClass="erro" />
+                <p:inputTextarea value="#{produtoBean.produto.descricao}" id="descricao" label="#{msgs.descricao}" required="true"/>
                 #{msgs.animal}:
-                <h:selectOneMenu value="#{produtoBean.produto.animal.id}" id="animal" required ="true">
+                <p:selectOneMenu value="#{produtoBean.produto.animal.id}" id="animal" required ="true">
                     <f:selectItems value="#{animalBean.listarAnimais}"/>
-                </h:selectOneMenu>
-                <h:message for="animal" styleClass="erro" />
+                </p:selectOneMenu>
                 #{msgs.marca}:
-                <h:inputText value="#{produtoBean.produto.marca}" id="marca" label="#{msgs.marca}" required="true"/>
-                <h:message for="marca" styleClass="erro" />
+                <p:inputText value="#{produtoBean.produto.marca}" id="marca" label="#{msgs.marca}" required="true"/>
                 #{msgs.valor}:
-                <h:inputText value="#{produtoBean.produto.valor}" id="valor" label="#{msgs.valor}" required="true">
+                <p:inputText value="#{produtoBean.produto.valor}" id="valor" label="#{msgs.valor}" required="true">
                     <f:convertNumber minFractionDigits="2"/>
-                </h:inputText>
-                <h:message for="valor" styleClass="erro" />
+                </p:inputText>
             </h:panelGrid>
-            <h:commandButton value="#{msgs.cadastrar}" action="#{produtoBean.novoProduto()}"/>
+            <p:commandButton value="#{msgs.incluir}" id="cadastrar" icon="fa fa-save" action="#{produtoBean.novoProduto()}" ajax="false"/>
+            <p:tooltip id="toolTipCadastrar" for="cadastrar" value="Salvar Produto" position="top"/>
         </h:form>
     </ui:define>
 

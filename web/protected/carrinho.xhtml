@@ -10,7 +10,7 @@
     <ui:define name="content">
         <h:form>
             <p:dataTable value="#{carrinhoBean.itens}" var="c" rows="10" rowsPerPageTemplate="5,10,20" paginator="true">
-                 <f:facet name="header">
+                <f:facet name="header">
                     <h3>#{msgs.produtosCarrinho}</h3>
                 </f:facet>
                 <p:column headerText="#{msgs.nomeProduto}">

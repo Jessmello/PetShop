@@ -2,7 +2,8 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./_template.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="top">
         #{msgs.titulo}
@@ -10,25 +11,23 @@
 
     <ui:define name="content">
         <h:form id="frm">
-            <h:panelGrid columns="3">
+            <p:growl id="messages" showDetail="true"/>
+            <h:panelGrid columns="2">
                 #{msgs.login}:
-                <h:inputText value="#{usuarioBean.usuario.login}" id="login" label="#{msgs.login}" required="true"/>
-                <h:message for="login" styleClass="erro" />
+                <p:inputText value="#{usuarioBean.usuario.login}" id="login" label="#{msgs.login}" required="true"/>
                 #{msgs.nome}:
-                <h:inputText value="#{usuarioBean.usuario.nome}" id="nome" label="#{msgs.nome}" required="true"/>
-                <h:message for="nome" styleClass="erro" />
+                <p:inputText value="#{usuarioBean.usuario.nome}" id="nome" label="#{msgs.nome}" required="true"/>
                 #{msgs.senha}:
-                <h:inputSecret value="#{usuarioBean.usuario.senha}" id="senha" label="#{msgs.senha}" required="true" redisplay="false"/>
-                <h:message for="senha" styleClass="erro" />
+                <p:password value="#{usuarioBean.usuario.senha}" id="senha" label="#{msgs.senha}" required="true" redisplay="false"/>
                 #{msgs.senha}:
-                <h:inputSecret value="#{usuarioBean.confirmeSenha}" id="confirmesenha" label="#{msgs.senha}" required="true" redisplay="false"/>
-                <h:message for="confirmesenha" styleClass="erro" />   
+                <p:password value="#{usuarioBean.confirmeSenha}" id="confirmesenha" label="#{msgs.senha}" required="true" redisplay="false"/>
                 #{msgs.admin}
-                <h:selectBooleanCheckbox value="#{usuarioBean.usuario.admin}" id="admin" label="#{msgs.admin}"/>
-                <h:message for="admin" styleClass="erro" />   
+                <p:selectBooleanCheckbox value="#{usuarioBean.usuario.admin}" id="admin" label="#{msgs.admin}"/>
             </h:panelGrid>
-            <h:commandButton value="#{msgs.cadastrar}" action="#{usuarioBean.cadastrar()}"/>
-            <h:commandButton value="#{msgs.cancelar}" action="/index" immediate="true"/>
+            <p:commandButton id="cadastrar" value="#{msgs.incluir}" icon="fa fa-save" action="#{usuarioBean.cadastrar()}" ajax="false" style="margin-left: 200px !important;"/>
+            <p:tooltip id="toolTipCadastrar" for="cadastrar" value="Salvar Usuario" position="top"/>
+            <p:commandButton id="cancelar" value="#{msgs.cancelar}" icon="fa fa-remove" action="/index" ajax="false" immediate="true"/>
+            <p:tooltip id="toolTipCancelar" for="cancelar" value="Cancelar inclusão" position="top"/>
         </h:form>
 
     </ui:define>

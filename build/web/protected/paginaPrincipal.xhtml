@@ -9,11 +9,11 @@
     
     <ui:define name="content">
         <h:form>
-            <p:dataTable  filteredValue="#{produtoBean.produtosFiltrados}" value="#{produtoBean.produtos}" var="c" rows="10" rowsPerPageTemplate="5,10,20" paginator="true">
+            <p:dataTable filteredValue="#{produtoBean.produtosFiltrados}" value="#{produtoBean.produtos}" var="c" rows="10" rowsPerPageTemplate="5,10,20" paginator="true">
                 <f:facet name="header">
                     <h3>#{msgs.produtos}</h3>
                 </f:facet>
-                <p:column headerText="#{msgs.id}" sortBy="#{c.id}" filterBy="#{c.id}">
+                <p:column headerText="#{msgs.id}" sortBy="#{c.id}" style="width: 8%; text-align: center;">
                     <h:commandLink value="#{c.id}" action="#{produtoBean.alterarProduto(c)}" rendered="#{usuarioBean.usuario.admin}"/>
                     <h:outputText value="#{c.id}" rendered="#{!usuarioBean.usuario.admin}"/>
                 </p:column>
@@ -31,8 +31,8 @@
                 <p:column style="width: 8%;">
                     <p:commandButton id="comprar" icon="fa fa-shopping-cart" actionListener="#{carrinhoBean.adicionarCarrinho(c)}" onclick="return confirm('#{msgs.confirmaAddCarrinho}');"/>
                     <p:tooltip id="toolTipComprar" for="comprar" value="Adicionar Produto ao carrinho" position="top"/>
-                    <p:commandButton id="excluir" icon="ui-icon-trash" actionListener="#{produtoBean.excluir(c)}" update="@form" onclick="return confirm('#{msgs.confirmaExclusao}');"/>
-                    <p:tooltip id="toolTipExcluir" for="excluir" value="Excluir Produto" position="top"/>
+                    <p:commandButton rendered="#{usuarioBean.usuario.admin}" id="excluir" icon="ui-icon-trash" actionListener="#{produtoBean.excluir(c)}" update="@form" onclick="return confirm('#{msgs.confirmaExclusao}');"/>
+                    <p:tooltip rendered="#{usuarioBean.usuario.admin}"  id="toolTipExcluir" for="excluir" value="Excluir Produto" position="top"/>
                 </p:column>
             </p:dataTable>
         </h:form>
