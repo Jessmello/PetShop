@@ -14,7 +14,7 @@
             <p:growl id="messages" showDetail="true"/>
             <h:panelGrid columns="2">
                 #{msgs.tipoProduto}:
-                <p:selectOneMenu value="#{produtoBean.produto.tipo}" id="tipo" required ="true">
+                <p:selectOneMenu value="#{produtoBean.produto.cdTipoProduto}" id="tipo" required ="true">
                     <f:selectItems value="#{produtoBean.tiposProdutos}"/>
                 </p:selectOneMenu>
                 #{msgs.nomeProduto}:
@@ -22,7 +22,7 @@
                 #{msgs.descricao}:
                 <p:inputTextarea value="#{produtoBean.produto.descricao}" id="descricao" label="#{msgs.descricao}" required="true"/>
                 #{msgs.animal}:
-                <p:selectOneMenu value="#{produtoBean.produto.animal.id}" id="animal" required ="true">
+                <p:selectOneMenu value="#{produtoBean.produto.idAnimal.id}" id="animal" required ="true">
                     <f:selectItems value="#{animalBean.listarAnimais}"/>
                 </p:selectOneMenu>
                 #{msgs.marca}:

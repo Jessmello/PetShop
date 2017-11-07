@@ -10,7 +10,6 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 import model.Animal;
-import model.DAOFactory;
 import service.AnimalRESTClient;
 
 /**

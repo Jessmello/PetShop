@@ -11,11 +11,11 @@ public class Produto implements Serializable {
     private Long id;
     private String nome;
     private String descricao;
-    private Animal animal = new Animal();
+    private Animal idAnimal = new Animal();
     private String marca;
     private int quantidade;
     private double valor;
-    private Integer tipo;
+    private Integer cdTipoProduto;
 
     public Produto() {
     }
@@ -44,12 +44,12 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public Animal getIdAnimal() {
+        return idAnimal;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void setIdAnimal(Animal idAnimal) {
+        this.idAnimal = idAnimal;
     }
 
     public String getMarca() {
@@ -76,12 +76,12 @@ public class Produto implements Serializable {
         this.valor = valor;
     }
 
-    public Integer getTipo() {
-        return tipo;
+    public Integer getCdTipoProduto() {
+        return cdTipoProduto;
     }
 
-    public void setTipo(Integer tipo) {
-        this.tipo = tipo;
+    public void setCdTipoProduto(Integer cdTipoProduto) {
+        this.cdTipoProduto = cdTipoProduto;
     }
     
 }

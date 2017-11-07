@@ -9,8 +9,8 @@ import javax.enterprise.inject.New;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-import model.DAOFactory;
 import model.Produto;
+import service.ProdutoRESTClient;
 
 /**
  *
@@ -32,7 +32,7 @@ public class ProdutoBean implements Serializable {
     
 
     public ProdutoBean() throws SQLException, ClassNotFoundException {
-        produtos = DAOFactory.getProdutoDAO().listar();
+        produtos = new ProdutoRESTClient().findAll();
     }
 
     public Produto getProduto() {
@@ -60,32 +60,32 @@ public class ProdutoBean implements Serializable {
     }
     
     public String consultarAcessorios() throws SQLException, ClassNotFoundException {
-        produtos = DAOFactory.getProdutoDAO().listarPorTipo(ACESSORIOS);
+        produtos = new ProdutoRESTClient().findByType(ACESSORIOS);
         return "/protected/acessorio";
     }
     
     public String consultarAlimentos()  throws SQLException, ClassNotFoundException {
-        produtos = DAOFactory.getProdutoDAO().listarPorTipo(ALIMENTOS);
+        produtos = new ProdutoRESTClient().findByType(ALIMENTOS);
         return "/protected/alimento";
     }
     
     public String consultarBrinquedos()  throws SQLException, ClassNotFoundException {
-        produtos = DAOFactory.getProdutoDAO().listarPorTipo(BRINQUEDOS);
+        produtos = new ProdutoRESTClient().findByType(BRINQUEDOS);
         return "/protected/brinquedo";
     }
     
     public String consultarHigiene()  throws SQLException, ClassNotFoundException {
-        produtos = DAOFactory.getProdutoDAO().listarPorTipo(HIGIENE);
+        produtos = new ProdutoRESTClient().findByType(HIGIENE);
         return "/protected/higiene";
     }
     
     public String consultarProduto() throws SQLException, ClassNotFoundException {
-        produtos = DAOFactory.getProdutoDAO().consultar(produto.getNome());
+        produtos = new ProdutoRESTClient().findByName(produto.getNome());
         return null;
     }
     
     public String consultarRemedios() throws SQLException, ClassNotFoundException {
-        produtos = DAOFactory.getProdutoDAO().listarPorTipo(REMEDIOS);
+        produtos = new ProdutoRESTClient().findByType(REMEDIOS);
         return "/protected/remedio";
     }
     
@@ -95,7 +95,7 @@ public class ProdutoBean implements Serializable {
     }
     
     public String novoProduto() throws SQLException, ClassNotFoundException {
-        DAOFactory.getProdutoDAO().adicionar(produto);
+        new ProdutoRESTClient().create(produto);
         return paginaPrincipal();
     }
     
@@ -105,17 +105,17 @@ public class ProdutoBean implements Serializable {
     }
     
     public String salvarAlteracaoProduto() throws SQLException, ClassNotFoundException{
-        DAOFactory.getProdutoDAO().alterar(produto);
+        new ProdutoRESTClient().edit(produto);
         return paginaPrincipal();
     }
     
     public String excluir(Produto p) throws SQLException, ClassNotFoundException{
-        DAOFactory.getProdutoDAO().excluir(p.getId());
+        new ProdutoRESTClient().delete(produto.getId());
         return paginaPrincipal();
     }
     
     public String paginaPrincipal() throws SQLException, ClassNotFoundException{
-        produtos = DAOFactory.getProdutoDAO().listar();
+        produtos = new ProdutoRESTClient().findAll();
         return "/protected/paginaPrincipal";
     }
     

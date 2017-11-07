@@ -7,9 +7,8 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.New;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import model.DAOFactory;
 import model.Usuario;
-import model.UsuarioDAO;
+import service.UsuarioRESTClient;
 import util.Messages;
 import util.Session;
 
@@ -41,7 +40,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public String logar() throws SQLException, ClassNotFoundException {
-        usuario = DAOFactory.getUsuarioDAO().consultar(usuario.getLogin(), usuario.getSenha());
+        usuario = new UsuarioRESTClient().autenticar(usuario.getLogin(), usuario.getSenha());
         if (usuario != null) {
             Session.setAttribute("usuario", usuario);
             return new ProdutoBean().paginaPrincipal();
@@ -63,10 +62,9 @@ public class UsuarioBean implements Serializable {
 
     public String cadastrar() throws SQLException, ClassNotFoundException {
         if (confirmeSenha.equals(usuario.getSenha())) {
-            UsuarioDAO udao = DAOFactory.getUsuarioDAO();
-            if (udao.isLoginNaoCadastrado(usuario.getLogin())) {
-                Long id = udao.adicionar(usuario);
-                usuario.setId(id);
+            if (new UsuarioRESTClient().findByLogin(usuario.getLogin()) == null) {
+                new UsuarioRESTClient().create(usuario);
+                usuario = new UsuarioRESTClient().findByLogin(usuario.getLogin());
                 Session.setAttribute("usuario", usuario);
                 return new ProdutoBean().paginaPrincipal();
             }

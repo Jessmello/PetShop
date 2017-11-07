@@ -28,14 +28,6 @@ public class AnimalRESTClient {
         return AnimalJson.fromJSONArray(response);
     }
 
-    public Animal find(Long id) {
-        Client client = ClientBuilder.newClient();
-        response = client.target(WEBSERVICE_URL + "petshop.animal/" + id)
-                        .request(MediaType.APPLICATION_JSON)
-                        .get(String.class);
-        client.close();
-        return AnimalJson.fromJSONObject(response);
-    }
     public void create(Animal animal) {
         Client client = ClientBuilder.newClient();
         client.target(WEBSERVICE_URL + "petshop.animal")
