@@ -12,10 +12,6 @@ import javax.inject.Named;
 import model.Animal;
 import service.AnimalRESTClient;
 
-/**
- *
- * @author Jess
- */
 @Named(value = "animalBean")
 @SessionScoped
 public class AnimalBean implements Serializable{

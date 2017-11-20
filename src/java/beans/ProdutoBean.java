@@ -12,10 +12,6 @@ import javax.inject.Named;
 import model.Produto;
 import service.ProdutoRESTClient;
 
-/**
- *
- * @author Jess
- */
 @Named(value = "produtoBean")
 @SessionScoped
 public class ProdutoBean implements Serializable {

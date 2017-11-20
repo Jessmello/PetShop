@@ -37,7 +37,7 @@ public class UsuarioRESTClient {
     }
     public void create(Usuario usuario) {
         Client client = ClientBuilder.newClient();
-        client.target(WEBSERVICE_URL + "petshop.usuario")
+        client.target(WEBSERVICE_URL + "petshop.usuarios")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(usuario,MediaType.APPLICATION_JSON));
         client.close();

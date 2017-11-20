@@ -2,10 +2,6 @@ package model;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Jess
- */
 public class Animal implements Serializable {
     
     private Long id;
